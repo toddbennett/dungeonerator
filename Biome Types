@@ -1,0 +1,6 @@
+0 - Blank biome
+shouldn't appear in game. all squares default to blank before they are assigned to another biome
+
+1 - grassland biome
+the "default" biome that will fill in the gaps after all other biomes are assigned. is the only biome that doesn't have to be contiunous
+characterized by bright green grass, sparse trees and small hills. grottos are generally hidden underneath rocks or grass. no dungeons should spawn in the grassland
