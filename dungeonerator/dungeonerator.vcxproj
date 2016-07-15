@@ -152,6 +152,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dungeonerator.cpp" />
+    <ClCompile Include="overworld.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="overworld.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
