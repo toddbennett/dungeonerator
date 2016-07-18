@@ -20,3 +20,11 @@ The village is full of shops and houses. Each square should have atleast one bui
 
 4 - Volcano Biome
 The volcano biome should always spawn in one of the top corners of the map. It can be of any size but should expand mostly along the top edge
+
+5 - Ice Mountain Biome
+Ice mountain biome follows the exact same rules as Volcano biome
+
+6 - Lake Biome
+Relatively small biome (6-12 squares) should be fairly convex in shape. If there is a river biome, it should be attached to the lake.
+
+7 - Graveyard biome
