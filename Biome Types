@@ -1,6 +1,46 @@
-0 - Blank biome
+0 - Blank Biome
 shouldn't appear in game. all squares default to blank before they are assigned to another biome
 
-1 - grassland biome
+1 - Grassland Biome
 the "default" biome that will fill in the gaps after all other biomes are assigned. is the only biome that doesn't have to be contiunous
 characterized by bright green grass, sparse trees and small hills. grottos are generally hidden underneath rocks or grass. no dungeons should spawn in the grassland
+Enemies: 
+
+2 - Forest Biome
+Forest biomes should spawn in most if not all maps. Should be fairly convex in shape and somewhat large.
+Can contain a "Lost Woods" segment where player must move in a sequence of directions in order to advance
+Can contain a small "Tree sprites village" with non-hostile NPCs
+Can contain a cabin/hut with a non-hostile NPC
+Can contain a dungeon
+Enemies:
+
+3 - Village Biome
+The village biome should spawn in every map. It should be relatively small in size (5-10 squares)
+The village is full of shops and houses. Each square should have atleast one building in it
+
+4 - Volcano Biome
+The volcano biome should always spawn in one of the top corners of the map. It can be of any size but should expand mostly along the top edge
+
+5 - Ice Mountain Biome
+Ice mountain biome follows the exact same rules as Volcano biome
+
+6 - Lake Biome
+Relatively small biome (6-12 squares) should be fairly convex in shape. If there is a river biome, it should be attached to the lake.
+
+7 - Graveyard biome
+
+8 - River biome
+
+9 - Castle biome
+
+10 - swamp biome
+
+11 - ruins biome
+
+12 - desert biome
+
+13 - farm biome
+
+14 - earthquake biome
+
+15 - sky/clouds biome
