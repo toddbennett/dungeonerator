@@ -28,3 +28,19 @@ Ice mountain biome follows the exact same rules as Volcano biome
 Relatively small biome (6-12 squares) should be fairly convex in shape. If there is a river biome, it should be attached to the lake.
 
 7 - Graveyard biome
+
+8 - River biome
+
+9 - Castle biome
+
+10 - swamp biome
+
+11 - ruins biome
+
+12 - desert biome
+
+13 - farm biome
+
+14 - earthquake biome
+
+15 - sky/clouds biome
