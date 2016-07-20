@@ -155,3 +155,8 @@ overworld::overworld()
 overworld::~overworld()
 {
 }
+
+int overworld::getBiome(int x, int y)
+{
+	return biomeGrid[x][y];
+}

@@ -1,10 +1,12 @@
 #include <stdio.h>
+#include <string.h>
 #include "SDL.h"
 #include "Dungeonerator.h"
 
 Dungeonerator::Dungeonerator() {
+	path = SDL_GetBasePath();
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("- D U N G E O N E R A T O R -", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, NULL);
+	window = SDL_CreateWindow("- D U N G E O N E R A T O R -", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, NULL);
 	if (!window) {
 		printf("Error creating window! %s", SDL_GetError());
 		return;
@@ -14,6 +16,11 @@ Dungeonerator::Dungeonerator() {
 		printf("Error creating window surface! %s", SDL_GetError());
 		return;
 	}
+
+	char *sprpath = new char[256];
+	strcpy(sprpath, path);
+	strcat(sprpath, "spr\\biome0.bmp");
+	// TODO: Sorry, I'm not done with this. Please let it be for now, I'll finish it tonight hopefully!
 }
 
 Dungeonerator::~Dungeonerator() {
@@ -22,6 +29,7 @@ Dungeonerator::~Dungeonerator() {
 }
 
 void Dungeonerator::run() {
+	printf("%s\n", path);
 	while (true) {
 		SDL_Event e;
 		while (SDL_PollEvent(&e)) {

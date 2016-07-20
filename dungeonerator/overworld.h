@@ -10,6 +10,7 @@ class overworld
 public:
 	overworld();
 	~overworld();
+	int getBiome(int x, int y);
 private:
 	void growPoint(int biome, point node, int biomesize, int percentage);
 	int mapwidth;

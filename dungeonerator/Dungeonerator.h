@@ -9,4 +9,5 @@ public:
 private:
 	SDL_Window *window;
 	SDL_Surface *surface;
+	char *path;
 };
