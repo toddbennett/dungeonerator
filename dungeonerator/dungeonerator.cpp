@@ -51,7 +51,15 @@ void Dungeonerator::run() {
 			switch (e.type) {
 			case SDL_QUIT:
 				return;
+			case SDL_KEYDOWN:
+				switch (e.key.keysym.scancode) {
+				case SDL_SCANCODE_SPACE:
+					delete o;
+					o = new overworld();
+					break;
+				}
 			}
+
 		}
 		SDL_FillRect(surface, NULL, 0x00CC00);
 		for (int i = 0; i < 16; i++) {
