@@ -8,51 +8,57 @@ void overworld::growPoint(int biome,point node, int biomesize, int percentage)
 	//larger percentage values will create more triangular/diamond shaped biomes, while smaller values will tend to create more snaking, fractal-like shapes
 	biomeGrid[node.x][node.y] = biome;
 	int a = 1; //number of points we have assigned to the biome so far
+	int b = 0;//make sure we don't get stuck in this loop
 	point biomePoints[40];
 	for (int i = 0; i < 40; i++) {
 		biomePoints[i] = { 0,0 };
 	}
-	while (a < biomesize)
+	while (a < biomesize && b < 300)
 	{
+		b++;
 		for (int i = 0; i < a; i++)
 		{
-			//check the points adjacent to biomePoints[a] could be added to the biome. if so, has a chance to add them
+			//check the points adjacent to biomePoints[i] could be added to the biome. if so, has a chance to add them
 			//left point
-			if (biomePoints[a].x > 0)
+			if (biomePoints[i].x > 0)
 			{
-				if (biomeGrid[biomePoints[a].x - 1][biomePoints[a].y] == 0 && rand() % 100 < percentage)
+				if (biomeGrid[biomePoints[i].x - 1][biomePoints[i].y] == 0 && rand() % 100 < percentage)
 				{
-					biomeGrid[biomePoints[a].x - 1][biomePoints[a].y] = biome;
+					biomeGrid[biomePoints[i].x - 1][biomePoints[i].y] = biome;
+					biomePoints[a] = { biomePoints[i].x - 1,biomePoints[i].y };
 					a++;
 					if (a == biomesize) break;
 				}
 			}
 			//right point
-			if (biomePoints[a].x < 15)
+			if (biomePoints[i].x < 15)
 			{
-				if (biomeGrid[biomePoints[a].x + 1][biomePoints[a].y] == 0 && rand() % 100 < percentage)
+				if (biomeGrid[biomePoints[i].x + 1][biomePoints[i].y] == 0 && rand() % 100 < percentage)
 				{
-					biomeGrid[biomePoints[a].x + 1][biomePoints[a].y] = biome;
+					biomeGrid[biomePoints[i].x + 1][biomePoints[i].y] = biome;
+					biomePoints[a] = { biomePoints[i].x + 1,biomePoints[i].y };
 					a++;
 					if (a == biomesize) break;
 				}
 			}
 			//up point
-			if (biomePoints[a].y > 0)
+			if (biomePoints[i].y > 0)
 			{
-				if (biomeGrid[biomePoints[a].x][biomePoints[a].y - 1] == 0 && rand() % 100 < percentage)
+				if (biomeGrid[biomePoints[i].x][biomePoints[i].y - 1] == 0 && rand() % 100 < percentage)
 				{
-					biomeGrid[biomePoints[a].x][biomePoints[a].y - 1] = biome;
+					biomeGrid[biomePoints[i].x][biomePoints[i].y - 1] = biome;
+					biomePoints[a] = { biomePoints[i].x,biomePoints[i].y-1 };
 					a++;
 					if (a == biomesize) break;
 				}
 			}
 			//down point
-			if (biomePoints[a].y < 15)
+			if (biomePoints[i].y < 15)
 			{
-				if (biomeGrid[biomePoints[a].x][biomePoints[a].y + 1] == 0 && rand() % 100 < percentage)
+				if (biomeGrid[biomePoints[i].x][biomePoints[i].y + 1] == 0 && rand() % 100 < percentage)
 				{
-					biomeGrid[biomePoints[a].x][biomePoints[a].y + 1] = biome;
+					biomeGrid[biomePoints[i].x][biomePoints[i].y + 1] = biome;
+					biomePoints[a] = { biomePoints[i].x,biomePoints[i].y + 1};
 					a++;
 					if (a == biomesize) break;
 				}
@@ -104,53 +110,64 @@ overworld::overworld()
 		else node = { 15,0 };
 
 		int biomesize = 20 + (rand() % 10) + (rand() % 10); //random value between 20 and 40, likely to be close to 30
-		//growPoint(4,node, biomesize, 50);
+		growPoint(4,node, biomesize, 50);
 	}
 	if (biomeList[5])
 	{
-		if (rand() % 2 == 1 && biomeGrid[0][0]==0) node = { 0,0 };
-		else node = { 15,0 };
+		if (biomeGrid[0][0] == 0)
+		{
+			if (rand()%2==1)	node = { 0,0 };
+			else node = { 15,0 };
+		}
+		else
+		{
+			node = { 15,0 };
+			biomeGrid[15][0] = 0;
+		}
 
 		int biomesize = 20 + (rand() % 10) + (rand() % 10); //random value between 20 and 40, likely to be close to 30
-		//growPoint(5,node, biomesize, 50);
+		growPoint(5, node, biomesize, 50);
 	}
 	//next place graveyard and castle, which require rectangular shapes
 	if (biomeList[7])
 	{
 		int gwidth = 2 + rand() % 2;  //2 or 3 squares wide
 		int gheight = 3 + rand() % 2;  //3 or 4 squares tall
+		node.x = rand() % (16 - gwidth);
+		node.y = rand() % (16 - gheight);
 
 		while (!(biomeGrid[node.x][node.y] == 0 &&
 			biomeGrid[node.x + gwidth - 1][node.y] == 0 &&
 			biomeGrid[node.x][node.y + gheight - 1] == 0 &&
 			biomeGrid[node.x + gwidth - 1][node.y + gheight - 1] == 0)) //we can cut into another biome a little bit, but try to minimize it
 		{
-			node.x = rand() % 16;
-			node.y = rand() % 16;
+			node.x = rand() % (16-gwidth);
+			node.y = rand() % (16-gheight);
 		}
 		for (int i = 0; i < gwidth; i++)
 		{
 			for (int j = 0; j < gheight; j++)
 			{
-				biomeGrid[i][j] = 7;
+				biomeGrid[i + node.x][j + node.y] = 7;
 			}
 		}
 	}
 	if (biomeList[9])
 	{
+		node = { rand() % 13,rand() % 13 };
 		while (!(biomeGrid[node.x][node.y] == 0 &&
 			biomeGrid[node.x + 2][node.y] == 0 &&
 			biomeGrid[node.x][node.y + 2] == 0 &&
 			biomeGrid[node.x + 2][node.y + 2] == 0)) //we can cut into another biome a little bit, but try to minimize it
 		{
-			node.x = rand() % 16;
-			node.y = rand() % 16;
+			node.x = rand() % 13;
+			node.y = rand() % 13;
 		}
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				biomeGrid[i][j] = 9;
+				biomeGrid[i+node.x][j+node.y] = 9;
 			}
 		}
 	}
