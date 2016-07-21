@@ -1,5 +1,7 @@
-#include "overworld.h"
 #include <stdlib.h>
+#include <time.h>
+
+#include "overworld.h"
 //Please refer to the Biome Types file on the github with regards to biome numbers and properties
 void overworld::growPoint(int biome,point node, int biomesize, int percentage)
 {
@@ -7,6 +9,9 @@ void overworld::growPoint(int biome,point node, int biomesize, int percentage)
 	biomeGrid[node.x][node.y] = biome;
 	int a = 1; //number of points we have assigned to the biome so far
 	point biomePoints[40];
+	for (int i = 0; i < 40; i++) {
+		biomePoints[i] = { 0,0 };
+	}
 	while (a < biomesize)
 	{
 		for (int i = 0; i < a; i++)
@@ -58,6 +63,7 @@ void overworld::growPoint(int biome,point node, int biomesize, int percentage)
 
 overworld::overworld()
 {
+	srand(time(NULL));
 	//later these will be selectable from the start screen
 	mapwidth = 16;
 	mapheight = 16;
@@ -90,7 +96,7 @@ overworld::overworld()
 	}
 	
 	//start placing the biomes we have picked
-	point node; //make sure each biome initializes this 
+	point node = { 0, 0 }; //make sure each biome initializes this 
 	//place mountains first
 	if (biomeList[4])
 	{
@@ -98,7 +104,7 @@ overworld::overworld()
 		else node = { 15,0 };
 
 		int biomesize = 20 + (rand() % 10) + (rand() % 10); //random value between 20 and 40, likely to be close to 30
-		growPoint(4,node, biomesize, 50);
+		//growPoint(4,node, biomesize, 50);
 	}
 	if (biomeList[5])
 	{
@@ -106,7 +112,7 @@ overworld::overworld()
 		else node = { 15,0 };
 
 		int biomesize = 20 + (rand() % 10) + (rand() % 10); //random value between 20 and 40, likely to be close to 30
-		growPoint(5,node, biomesize, 50);
+		//growPoint(5,node, biomesize, 50);
 	}
 	//next place graveyard and castle, which require rectangular shapes
 	if (biomeList[7])
