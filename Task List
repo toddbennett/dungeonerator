@@ -1,0 +1,14 @@
+This document exists to guide the development process. It is by no means an exhaustive list nor must everything on the list end up in the game
+
+
+World Generation:
+Biome mapping
+room class
+Topological mapping (Placing "doors" in room classes to link them to one another)
+interior mapping (Generating rooms for and placing all "Indoor" areas. Houses, grottoes, etc)
+Dungeon mapping (Placing and generating dungeons)
+
+Bestiary:
+monster class
+
+
