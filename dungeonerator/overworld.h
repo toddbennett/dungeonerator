@@ -12,7 +12,9 @@ public:
 	~overworld();
 	int getBiome(int x, int y);
 private:
-	void growPoint(int biome, point node, int biomesize, int percentage);
+	void growPoint(int biome, point nodule, int biomesize, int percentage);
+	void fillPoint(int biome);
+	point getFreePoint();
 	int mapwidth;
 	int mapheight;
 	int mapsize;
