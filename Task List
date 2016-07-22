@@ -6,9 +6,16 @@ Biome mapping
 room class
 Topological mapping (Placing "doors" in room classes to link them to one another)
 interior mapping (Generating rooms for and placing all "Indoor" areas. Houses, grottoes, etc)
-Dungeon mapping (Placing and generating dungeons)
+Dungeon mapping (Placing dungeon entrances)
+
+Dungeons:
+Mapping
 
 Bestiary:
 monster class
 
+NPCs:
+NPC class
 
+Lore:
+Name generator
