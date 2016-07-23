@@ -308,7 +308,40 @@ overworld::~overworld()
 {
 }
 
-int overworld::getBiome(int x, int y)
+Biome overworld::getBiome(int x, int y)
 {
-	return biomeGrid[x][y];
+	switch (biomeGrid[x][y]) {
+	case 1:
+		return BIO_GRASSLAND;
+	case 2:
+		return BIO_VILLAGE;
+	case 3:
+		return BIO_FOREST;
+	case 4:
+		return BIO_VOLCANO;
+	case 5:
+		return BIO_ICE;
+	case 6:
+		return BIO_LAKE;
+	case 7:
+		return BIO_GRAVEYARD;
+	case 8:
+		return BIO_RIVER;
+	case 9:
+		return BIO_CASTLE;
+	case 10:
+		return BIO_SWAMP;
+	case 11:
+		return BIO_RUINS;
+	case 12:
+		return BIO_DESERT;
+	case 13:
+		return BIO_FARM;
+	case 14:
+		return BIO_EARTHQUAKE;
+	case 15:
+		return BIO_SKY;
+	default:
+		return BIO_BLANK;
+	}
 }

@@ -2,6 +2,7 @@
 #include <string.h>
 #include "SDL.h"
 #include "Dungeonerator.h"
+#include "Room.h"
 
 Dungeonerator::Dungeonerator() {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -24,26 +25,19 @@ Dungeonerator::Dungeonerator() {
 }
 
 Dungeonerator::~Dungeonerator() {
+	delete[] path;
+	delete o;
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
 
 void Dungeonerator::run() {
-	printf("%s\n", path);
-	SDL_Surface **biomeTable = new SDL_Surface *[16];
+	Room ***map = new Room**[16];
 	for (int i = 0; i < 16; i++) {
-		char *sprPath = new char[256];
-		char *num = new char[16];
-		sprPath[0] = 0;
-		num[0] = 0;
-		strcat(sprPath, path);
-		strcat(sprPath, "biome");
-		SDL_itoa(i, num, 10);
-		strcat(sprPath, num);
-		strcat(sprPath, ".bmp");
-		biomeTable[i] = SDL_LoadBMP(sprPath);
-		delete[] sprPath;
-		delete[] num;
+		map[i] = new Room *[16];
+		for (int j = 0; j < 16; j++) {
+			map[i][j] = new Room(o->getBiome(i, j), i, j, path);
+		}
 	}
 	while (true) {
 		SDL_Event e;
@@ -56,6 +50,12 @@ void Dungeonerator::run() {
 				case SDL_SCANCODE_SPACE:
 					delete o;
 					o = new overworld();
+					for (int i = 0; i < 16; i++) {
+						for (int j = 0; j < 16; j++) {
+							delete map[i][j];
+							map[i][j] = new Room(o->getBiome(i, j), i, j, path);
+						}
+					}
 					break;
 				}
 			}
@@ -64,8 +64,7 @@ void Dungeonerator::run() {
 		SDL_FillRect(surface, NULL, 0x00CC00);
 		for (int i = 0; i < 16; i++) {
 			for (int j = 0; j < 16; j++) {
-				SDL_Rect d{ i * 50, j * 50, 50, 50 };
-				SDL_BlitScaled(biomeTable[o->getBiome(i, j)], NULL, surface, &d);
+				map[i][j]->draw(surface, 50, 50);
 			}
 		}
 		SDL_UpdateWindowSurface(window);

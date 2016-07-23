@@ -1,4 +1,5 @@
 #pragma once
+#include "Biome.h"
 
 struct point {
 	int x;
@@ -10,7 +11,7 @@ class overworld
 public:
 	overworld();
 	~overworld();
-	int getBiome(int x, int y);
+	Biome getBiome(int x, int y);
 private:
 	void growPoint(int biome, point nodule, int biomesize, int percentage);
 	void fillPoint(int biome);

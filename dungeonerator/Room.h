@@ -3,17 +3,12 @@
 #include "Biome.h"
 #include "GameObject.h"
 
-class Room
+class Room : public GameObject
 {
 public:
-	Room();
+	Room(Biome biome, int x, int y, char *path);
 	~Room();
 private:
 	Biome biome;
-	GameObject *board[16][16];
-	Room *left;
-	Room *up;
-	Room *right;
-	Room *down;
 };
 
