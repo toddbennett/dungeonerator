@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SDL.h"
+#include <string>
 
 class GameObject
 {
@@ -15,5 +16,6 @@ protected:
 private:
 	SDL_Surface *sprite;
 	int x, y;
+	std::string getName();
 };
 
