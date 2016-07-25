@@ -1,5 +1,5 @@
 #pragma once
-enum Biome {
+enum biomeType {
 	BIO_BLANK,
 	BIO_GRASSLAND,
 	BIO_VILLAGE,
@@ -15,11 +15,17 @@ enum Biome {
 	BIO_DESERT,
 	BIO_FARM,
 	BIO_EARTHQUAKE,
-	BIO_SKY,
-	BIO_COWBOYS,
-	BIO_CIVILWAR,
-	BIO_EVILVILLAGE,
-	BIO_METAL,
-	BIO_SPACE,
-	BIO_CHINA
+	BIO_SKY
+};
+
+class biome
+{
+public:
+	biome();
+	~biome();
+protected:
+	int low_x;
+	int high_x;
+	int low_y;
+	int high_y;
 };
