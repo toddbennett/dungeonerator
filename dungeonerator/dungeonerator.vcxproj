@@ -151,6 +151,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Biome.cpp" />
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="dungeonerator.cpp" />
     <ClCompile Include="GameObject.cpp" />
