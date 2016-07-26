@@ -308,7 +308,7 @@ overworld::~overworld()
 {
 }
 
-Biome overworld::getBiome(int x, int y)
+biomeType overworld::getBiome(int x, int y)
 {
 	switch (biomeGrid[x][y]) {
 	case 1:

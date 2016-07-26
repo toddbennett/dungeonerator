@@ -25,6 +25,11 @@ void GameObject::draw(SDL_Surface *surface, int w, int h)
 	SDL_BlitScaled(sprite, NULL, surface, &d);
 }
 
+int GameObject::getDepth()
+{
+	return depth;
+}
+
 std::string getName()
 {
 //100% sure this is a bad implementation

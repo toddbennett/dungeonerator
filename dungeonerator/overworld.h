@@ -11,7 +11,7 @@ class overworld
 public:
 	overworld();
 	~overworld();
-	Biome getBiome(int x, int y);
+	biomeType getBiome(int x, int y);
 private:
 	void growPoint(int biome, point nodule, int biomesize, int percentage);
 	void fillPoint(int biome);

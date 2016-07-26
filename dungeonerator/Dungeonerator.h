@@ -1,6 +1,9 @@
 #pragma once
+#include <queue>
+#include <vector>
 #include "SDL.h"
 #include "overworld.h"
+#include "GameObject.h"
 
 class Dungeonerator {
 public:
@@ -12,4 +15,6 @@ private:
 	SDL_Surface *surface;
 	char *path;
 	overworld *o;
+	GameObject *objList;
+	std::priority_queue<GameObject *, std::vector<GameObject *>, DepthComparator> objQ;
 };
