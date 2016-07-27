@@ -152,9 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dungeon.cpp" />
-    <ClCompile Include="dungeonerator.cpp" />
+    <ClCompile Include="Dungeonerator.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="overworld.cpp" />
+    <ClCompile Include="Overworld.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />
   </ItemGroup>
@@ -163,7 +163,7 @@
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="Dungeonerator.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="overworld.h" />
+    <ClInclude Include="Overworld.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
   </ItemGroup>

@@ -2,7 +2,7 @@
 #include <queue>
 #include <vector>
 #include "SDL.h"
-#include "overworld.h"
+#include "Overworld.h"
 #include "GameObject.h"
 
 class Dungeonerator {
