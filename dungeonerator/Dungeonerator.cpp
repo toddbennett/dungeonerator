@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <string.h>
+#include <iostream>
+#include <time.h>
 #include "SDL.h"
 #include "Dungeonerator.h"
 #include "Room.h"
 #include "Player.h"
+
 
 Dungeonerator::Dungeonerator() {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -41,6 +44,7 @@ void Dungeonerator::run() {
 		}
 	}
 	Player *player = new Player(8, 8, path, renderer);
+	std::cout << player->getName() << "\n";
 	while (true) {
 		SDL_Event e;
 		while (SDL_PollEvent(&e)) {
@@ -50,6 +54,7 @@ void Dungeonerator::run() {
 			case SDL_KEYDOWN:
 				switch (e.key.keysym.scancode) {
 				case SDL_SCANCODE_SPACE:
+					std::cout << player->getName() << "\n";
 					delete o;
 					o = new overworld();
 					for (int i = 0; i < 16; i++) {
@@ -113,6 +118,7 @@ void Dungeonerator::run() {
 
 int main(int argc, char **argv)
 {
+	srand(time(NULL));
 	Dungeonerator *d = new Dungeonerator();
 	d->run();
 	delete d;

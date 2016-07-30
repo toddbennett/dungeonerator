@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <time.h>
 
 #include "overworld.h"
 //Please refer to the Biome Types file on the github with regards to biome numbers and properties
@@ -87,7 +86,6 @@ void overworld::fillPoint(biomeType biome)
 
 overworld::overworld()
 {
-	srand(time(NULL));
 	//later these will be selectable from the start screen
 	mapwidth = 16;
 	mapheight = 16;

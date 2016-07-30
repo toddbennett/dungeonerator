@@ -10,6 +10,7 @@ public:
 	~GameObject();
 	virtual void draw(SDL_Renderer *renderer, int w, int h);
 	int getDepth();
+	std::string getName();
 protected:
 	// a subclass can use this as their base constructor but please remember to set a sprite afterwards!
 	GameObject(int x, int y);
@@ -18,7 +19,7 @@ protected:
 	SDL_Texture *texture;
 private:
 	
-	std::string getName();
+	
 	int depth = 1;
 };
 
