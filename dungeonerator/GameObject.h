@@ -6,16 +6,16 @@
 class GameObject
 {
 public:
-	GameObject(char *sprPath, int x, int y);
+	GameObject(char *sprPath, int x, int y, SDL_Renderer *renderer);
 	~GameObject();
-	virtual void draw(SDL_Surface *surface, int w, int h);
+	virtual void draw(SDL_Renderer *renderer, int w, int h);
 	int getDepth();
 protected:
 	// a subclass can use this as their base constructor but please remember to set a sprite afterwards!
 	GameObject(int x, int y);
-	void setSprite(char *sprPath);
+	void setSprite(char *sprPath, SDL_Renderer *renderer);
 	int x, y;
-	SDL_Surface *sprite;
+	SDL_Texture *texture;
 private:
 	
 	std::string getName();

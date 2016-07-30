@@ -1,12 +1,12 @@
 #include "Player.h"
 
-Player::Player(int x, int y, char *path) : GameObject(x, y)
+Player::Player(int x, int y, char *path, SDL_Renderer *renderer) : GameObject(x, y)
 {
 	char *sprPath = new char[256];
 	sprPath[0] = 0;
 	strcat(sprPath, path);
 	strcat(sprPath, "player.bmp");
-	setSprite(sprPath);
+	setSprite(sprPath, renderer);
 	delete[] sprPath;
 }
 
@@ -14,28 +14,44 @@ Player::~Player()
 {
 }
 
-void Player::moveRight()
+void Player::moveRight(bool b)
 {
-	x += moveSpeed;
+	right = b;
 }
 
-void Player::moveUp()
+void Player::moveUp(bool b)
 {
-	y -= moveSpeed;
+	up = b;
 }
 
-void Player::moveLeft()
+void Player::moveLeft(bool b)
 {
-	x -= moveSpeed;
+	left = b;
 }
 
-void Player::moveDown()
+void Player::moveDown(bool b)
 {
-	y += moveSpeed;
+	down = b;
 }
 
-void Player::draw(SDL_Surface *surface, int w, int h)
+void Player::moveStep()
+{
+	if (right) {
+		x += moveSpeed;
+	}
+	if (up) {
+		y -= moveSpeed;
+	}
+	if (left) {
+		x -= moveSpeed;
+	}
+	if (down) {
+		y += moveSpeed;
+	}
+}
+
+void Player::draw(SDL_Renderer *renderer, int w, int h)
 {
 	SDL_Rect d{ x*w/16,y*h/16,w,h };
-	SDL_BlitScaled(sprite, NULL, surface, &d);
+	SDL_RenderCopy(renderer, texture, NULL, &d);
 }

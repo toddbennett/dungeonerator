@@ -12,9 +12,9 @@ Dungeonerator::Dungeonerator() {
 		printf("Error creating window! %s", SDL_GetError());
 		return;
 	}
-	surface = SDL_GetWindowSurface(window);
-	if (!surface) {
-		printf("Error creating window surface! %s", SDL_GetError());
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+	if (!renderer) {
+		printf("Error creating renderer! %s", SDL_GetError());
 		return;
 	}
 
@@ -37,10 +37,10 @@ void Dungeonerator::run() {
 	for (int i = 0; i < 16; i++) {
 		map[i] = new Room *[16];
 		for (int j = 0; j < 16; j++) {
-			map[i][j] = new Room(o->getBiome(i, j), i, j, path);
+			map[i][j] = new Room(o->getBiome(i, j), i, j, path, renderer);
 		}
 	}
-	Player *player = new Player(8, 8, path);
+	Player *player = new Player(8, 8, path, renderer);
 	while (true) {
 		SDL_Event e;
 		while (SDL_PollEvent(&e)) {
@@ -55,38 +55,59 @@ void Dungeonerator::run() {
 					for (int i = 0; i < 16; i++) {
 						for (int j = 0; j < 16; j++) {
 							delete map[i][j];
-							map[i][j] = new Room(o->getBiome(i, j), i, j, path);
+							map[i][j] = new Room(o->getBiome(i, j), i, j, path, renderer);
 						}
 					}
 					break;
 				case SDL_SCANCODE_RIGHT:
-					player->moveRight();
+					player->moveRight(true);
 					break;
 				case SDL_SCANCODE_UP:
-					player->moveUp();
+					player->moveUp(true);
 					break;
 				case SDL_SCANCODE_LEFT:
-					player->moveLeft();
+					player->moveLeft(true);
 					break;
 				case SDL_SCANCODE_DOWN:
-					player->moveDown();
+					player->moveDown(true);
+					break;
+				case SDL_SCANCODE_ESCAPE:
+					return;
+				}
+				break;
+			case SDL_KEYUP:
+				switch (e.key.keysym.scancode) {
+				case SDL_SCANCODE_RIGHT:
+					player->moveRight(false);
+					break;
+				case SDL_SCANCODE_UP:
+					player->moveUp(false);
+					break;
+				case SDL_SCANCODE_LEFT:
+					player->moveLeft(false);
+					break;
+				case SDL_SCANCODE_DOWN:
+					player->moveDown(false);
 					break;
 				}
+				break;
 			}
 
 		}
+		player->moveStep();
 		objQ.push(player);
-		SDL_FillRect(surface, NULL, 0x00CC00);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderFillRect(renderer, NULL);
 		for (int i = 0; i < 16; i++) {
 			for (int j = 0; j < 16; j++) {
-				map[i][j]->draw(surface, 50, 50);
+				map[i][j]->draw(renderer, 50, 50);
 			}
 		}
 		while (!objQ.empty()) {
-			objQ.top()->draw(surface, 50, 50);
+			objQ.top()->draw(renderer, 50, 50);
 			objQ.pop();
 		}
-		SDL_UpdateWindowSurface(window);
+		SDL_RenderPresent(renderer);
 	}
 }
 

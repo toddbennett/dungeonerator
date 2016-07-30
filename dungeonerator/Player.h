@@ -5,14 +5,19 @@
 class Player : public GameObject
 {
 public:
-	Player(int x, int y, char *path);
+	Player(int x, int y, char *path, SDL_Renderer *renderer);
 	~Player();
-	void moveRight();
-	void moveUp();
-	void moveLeft();
-	void moveDown();
-	virtual void draw(SDL_Surface *surface, int w, int h);
+	void moveRight(bool b);
+	void moveUp(bool b);
+	void moveLeft(bool b);
+	void moveDown(bool b);
+	void moveStep();
+	virtual void draw(SDL_Renderer *renderer, int w, int h);
 private:
-	int moveSpeed = 4;
+	int moveSpeed = 1;
+	bool right = false;
+	bool up = false;
+	bool left = false;
+	bool down = false;
 };
 

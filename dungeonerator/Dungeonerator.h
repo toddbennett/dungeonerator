@@ -12,7 +12,7 @@ public:
 	void run();
 private:
 	SDL_Window *window;
-	SDL_Surface *surface;
+	SDL_Renderer *renderer;
 	char *path;
 	overworld *o;
 	GameObject *objList;
