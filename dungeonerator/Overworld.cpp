@@ -9,7 +9,7 @@ point overworld::getFreePoint()
 	return freePoint;
 }
 
-void overworld::growPoint(biomeType biome,point nodule, int biomesize, int percentage)
+void overworld::growPoint(BiomeType biome,point nodule, int biomesize, int percentage)
 {
 	//larger percentage values will create more triangular/diamond shaped biomes, while smaller values will tend to create more snaking, fractal-like shapes
 	biomeGrid[nodule.x][nodule.y] = biome;
@@ -72,7 +72,7 @@ void overworld::growPoint(biomeType biome,point nodule, int biomesize, int perce
 	}
 }
 
-void overworld::fillPoint(biomeType biome)
+void overworld::fillPoint(BiomeType biome)
 {
 	//fillPoint checks the grid for small gaps and crevices and fills them in
 	for (int i = 0; i < 16; i++)
@@ -306,7 +306,7 @@ overworld::~overworld()
 {
 }
 
-biomeType overworld::getBiome(int x, int y)
+BiomeType overworld::getBiome(int x, int y)
 {
 	return biomeGrid[x][y];
 }
