@@ -10,7 +10,7 @@ point overworld::getFreePoint()
 	return freePoint;
 }
 
-void overworld::growPoint(int biome,point nodule, int biomesize, int percentage)
+void overworld::growPoint(biomeType biome,point nodule, int biomesize, int percentage)
 {
 	//larger percentage values will create more triangular/diamond shaped biomes, while smaller values will tend to create more snaking, fractal-like shapes
 	biomeGrid[nodule.x][nodule.y] = biome;
@@ -73,7 +73,7 @@ void overworld::growPoint(int biome,point nodule, int biomesize, int percentage)
 	}
 }
 
-void overworld::fillPoint(int biome)
+void overworld::fillPoint(biomeType biome)
 {
 	//fillPoint checks the grid for small gaps and crevices and fills them in
 	for (int i = 0; i < 16; i++)
@@ -99,7 +99,7 @@ overworld::overworld()
 	{ 
 		for (int j = 0; j < 16; j++)
 		{
-			biomeGrid[i][j] = 0;
+			biomeGrid[i][j] = BIO_BLANK;
 		}
 	}
 	
@@ -128,7 +128,7 @@ overworld::overworld()
 		else node = { 15,0 };
 
 		int biomesize = 20 + (rand() % 5) + (rand() % 5); //random value between 20 and 30, likely to be close to 25
-		growPoint(4,node, biomesize, 50);
+		growPoint(BIO_VOLCANO,node, biomesize, 50);
 	}
 	if (biomeList[5])
 	{
@@ -141,11 +141,11 @@ overworld::overworld()
 		else
 		{
 			node = { 15,0 };
-			biomeGrid[15][0] = 0;
+			biomeGrid[15][0] = BIO_BLANK;
 		}
 
 		int biomesize = 20 + (rand() % 5) + (rand() % 5); //random value between 20 and 30, likely to be close to 25
-		growPoint(5, node, biomesize, 50);
+		growPoint(BIO_ICE, node, biomesize, 50);
 	}
 	//next place graveyard and castle, which require rectangular shapes
 	if (biomeList[7])
@@ -167,7 +167,7 @@ overworld::overworld()
 		{
 			for (int j = 0; j < gheight; j++)
 			{
-				biomeGrid[i + node.x][j + node.y] = 7;
+				biomeGrid[i + node.x][j + node.y] = BIO_GRAVEYARD;
 			}
 		}
 	}
@@ -186,7 +186,7 @@ overworld::overworld()
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				biomeGrid[i+node.x][j+node.y] = 9;
+				biomeGrid[i+node.x][j+node.y] = BIO_CASTLE;
 			}
 		}
 	}
@@ -198,7 +198,7 @@ overworld::overworld()
 				{
 					node = { rand() % 16,15 };
 				}
-				growPoint(6, node, 20, 80);
+				growPoint(BIO_LAKE, node, 20, 80);
 	}
 	//river
 	if (biomeList[8])
@@ -225,7 +225,7 @@ overworld::overworld()
 			}
 			node.y = node.y + 1;
 		}
-		biomeGrid[node.x][node.y] = 8;
+		biomeGrid[node.x][node.y] = BIO_RIVER;
 		//worm our way down to the bottom
 		int b = 0; //make sure we don' get stuck forever
 		while (node.y != target.y && b<1000)
@@ -234,19 +234,19 @@ overworld::overworld()
 			if (biomeGrid[node.x][node.y + 1] == 0 && node.y < target.y && rand()%2 ==1)
 			{
 				node.y++;
-				biomeGrid[node.x][node.y] = 8;
+				biomeGrid[node.x][node.y] = BIO_RIVER;
 			}
 			//should we step right?
 			if (biomeGrid[node.x+1][node.y] == 0 && node.x < target.x && rand() % 2 == 1)
 			{
 				node.x++;
-				biomeGrid[node.x][node.y] = 8;
+				biomeGrid[node.x][node.y] = BIO_RIVER;
 			}
 			//should we step left?
 			if (biomeGrid[node.x - 1][node.y] == 0 && node.x > target.x && rand() % 2 == 1)
 			{
 				node.x--;
-				biomeGrid[node.x][node.y] = 8;
+				biomeGrid[node.x][node.y] = BIO_RIVER;
 			}
 			//should we stop?
 			if ((node.x == target.x && node.y == target.y) || biomeGrid[node.x + 1][node.y] == 6 || biomeGrid[node.x - 1][node.y] == 6 || biomeGrid[node.x][node.y + 1] == 6) break;
@@ -257,48 +257,48 @@ overworld::overworld()
 	if (biomeList[2])
 	{
 		node = getFreePoint();
-		growPoint(2, node, 5 + rand() % 5, 50);
+		growPoint(BIO_VILLAGE, node, 5 + rand() % 5, 50);
 	}
 	if (biomeList[3])
 	{
 		node = getFreePoint();
-		growPoint(3, node, 15 + rand() % 20, 50);
+		growPoint(BIO_FOREST, node, 15 + rand() % 20, 50);
 	}
 	if (biomeList[10])
 	{
 		node = getFreePoint();
-		growPoint(10, node, 15 + rand() % 20, 50);
+		growPoint(BIO_SWAMP, node, 15 + rand() % 20, 50);
 	}
 	if (biomeList[11])
 	{
 		node = getFreePoint();
-		growPoint(11, node, 15 + rand() % 20, 70);
+		growPoint(BIO_RUINS, node, 15 + rand() % 20, 70);
 	}
 	if (biomeList[12])
 	{
 		node = getFreePoint();
-		growPoint(12, node, 15 + rand() % 20, 50);
+		growPoint(BIO_DESERT, node, 15 + rand() % 20, 50);
 	}
 	if (biomeList[13])
 	{
 		node = getFreePoint();
-		growPoint(13, node, 15 + rand() % 20, 40);
+		growPoint(BIO_FARM, node, 15 + rand() % 20, 40);
 	}
 	if (biomeList[14])
 	{
 		node = getFreePoint();
-		growPoint(14, node, 15 + rand() % 20, 40);
+		growPoint(BIO_EARTHQUAKE, node, 15 + rand() % 20, 40);
 	}
 	if (biomeList[15])
 	{
 		node = getFreePoint();
-		growPoint(15, node, 15 + rand() % 20, 40);
+		growPoint(BIO_SKY, node, 15 + rand() % 20, 40);
 	}
 	for (int i = 0; i < 16; i++)
 	{
 		for (int j = 0; j < 16; j++)
 		{
-			if (biomeGrid[i][j] == 0) biomeGrid[i][j] = 1;
+			if (biomeGrid[i][j] == 0) biomeGrid[i][j] = BIO_GRASSLAND;
 		}
 	}
 }
@@ -308,40 +308,7 @@ overworld::~overworld()
 {
 }
 
-Biome overworld::getBiome(int x, int y)
+biomeType overworld::getBiome(int x, int y)
 {
-	switch (biomeGrid[x][y]) {
-	case 1:
-		return BIO_GRASSLAND;
-	case 2:
-		return BIO_VILLAGE;
-	case 3:
-		return BIO_FOREST;
-	case 4:
-		return BIO_VOLCANO;
-	case 5:
-		return BIO_ICE;
-	case 6:
-		return BIO_LAKE;
-	case 7:
-		return BIO_GRAVEYARD;
-	case 8:
-		return BIO_RIVER;
-	case 9:
-		return BIO_CASTLE;
-	case 10:
-		return BIO_SWAMP;
-	case 11:
-		return BIO_RUINS;
-	case 12:
-		return BIO_DESERT;
-	case 13:
-		return BIO_FARM;
-	case 14:
-		return BIO_EARTHQUAKE;
-	case 15:
-		return BIO_SKY;
-	default:
-		return BIO_BLANK;
-	}
+	return biomeGrid[x][y];
 }

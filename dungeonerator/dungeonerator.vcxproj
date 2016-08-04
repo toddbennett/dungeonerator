@@ -156,6 +156,7 @@
     <ClCompile Include="dungeonerator.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="overworld.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +165,7 @@
     <ClInclude Include="Dungeonerator.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="overworld.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

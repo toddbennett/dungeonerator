@@ -6,9 +6,9 @@
 class Room : public GameObject
 {
 public:
-	Room(Biome biome, int x, int y, char *path);
+	Room(biomeType biome, int x, int y, char *path);
 	~Room();
 private:
-	Biome biome;
+	biomeType biome;
 };
 

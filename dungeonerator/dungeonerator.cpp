@@ -3,6 +3,7 @@
 #include "SDL.h"
 #include "Dungeonerator.h"
 #include "Room.h"
+#include "Player.h"
 
 Dungeonerator::Dungeonerator() {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -39,6 +40,7 @@ void Dungeonerator::run() {
 			map[i][j] = new Room(o->getBiome(i, j), i, j, path);
 		}
 	}
+	Player *player = new Player(8, 8, path);
 	while (true) {
 		SDL_Event e;
 		while (SDL_PollEvent(&e)) {
@@ -57,15 +59,32 @@ void Dungeonerator::run() {
 						}
 					}
 					break;
+				case SDL_SCANCODE_RIGHT:
+					player->moveRight();
+					break;
+				case SDL_SCANCODE_UP:
+					player->moveUp();
+					break;
+				case SDL_SCANCODE_LEFT:
+					player->moveLeft();
+					break;
+				case SDL_SCANCODE_DOWN:
+					player->moveDown();
+					break;
 				}
 			}
 
 		}
+		objQ.push(player);
 		SDL_FillRect(surface, NULL, 0x00CC00);
 		for (int i = 0; i < 16; i++) {
 			for (int j = 0; j < 16; j++) {
 				map[i][j]->draw(surface, 50, 50);
 			}
+		}
+		while (!objQ.empty()) {
+			objQ.top()->draw(surface, 50, 50);
+			objQ.pop();
 		}
 		SDL_UpdateWindowSurface(window);
 	}

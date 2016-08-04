@@ -1,7 +1,7 @@
 #include <string.h>
 #include "Room.h"
 
-Room::Room(Biome biome, int x, int y, char *path) : GameObject(x, y)
+Room::Room(biomeType biome, int x, int y, char *path) : GameObject(x, y)
 {
 	this->biome = biome;
 	char *sprPath = new char[256];
