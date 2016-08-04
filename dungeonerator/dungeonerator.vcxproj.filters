@@ -36,6 +36,9 @@
     <ClCompile Include="Overworld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Biome.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">

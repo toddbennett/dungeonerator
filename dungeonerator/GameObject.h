@@ -17,6 +17,7 @@ protected:
 	void setSprite(char *sprPath, SDL_Renderer *renderer);
 	int x, y;
 	SDL_Texture *texture;
+	SDL_Renderer *renderer;
 private:
 	
 	

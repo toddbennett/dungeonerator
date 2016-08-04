@@ -105,6 +105,7 @@ overworld::overworld()
 	biomeList[0] = false; //no maps should contain blank tiles
 	biomeList[1] = true;  //every map contains grassland
 	biomeList[2] = true;  //every map contains a village
+	
 	int biomespicked = 2; //two biomes have already been picked
 	for (int i=3;i<16;i++)
 	{
@@ -116,6 +117,10 @@ overworld::overworld()
 		}
 		else biomeList[i] = false;
 	}
+
+	// Always spawn a castle: for testing biome generation
+	biomeList[9] = true;
+	biomespicked += 1;
 	
 	//start placing the biomes we have picked
 	point node = { 0, 0 }; //make sure each biome initializes this 

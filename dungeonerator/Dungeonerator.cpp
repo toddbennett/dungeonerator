@@ -45,6 +45,8 @@ void Dungeonerator::run() {
 	}
 	Player *player = new Player(8, 8, path, renderer);
 	std::cout << player->getName() << "\n";
+	Biome *testBiome = new Biome(path, renderer);
+	Room *testRoom = testBiome->createRoom(0, 0);
 	while (true) {
 		SDL_Event e;
 		while (SDL_PollEvent(&e)) {
@@ -103,11 +105,7 @@ void Dungeonerator::run() {
 		objQ.push(player);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderFillRect(renderer, NULL);
-		for (int i = 0; i < 16; i++) {
-			for (int j = 0; j < 16; j++) {
-				map[i][j]->draw(renderer, 50, 50);
-			}
-		}
+		testRoom->drawBackground();
 		while (!objQ.empty()) {
 			objQ.top()->draw(renderer, 50, 50);
 			objQ.pop();

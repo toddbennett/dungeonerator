@@ -3,6 +3,7 @@
 
 GameObject::GameObject(char *sprPath, int x, int y, SDL_Renderer *renderer)
 {
+	this->renderer = renderer;
 	SDL_Surface *sprite = SDL_LoadBMP(sprPath);
 	texture = SDL_CreateTextureFromSurface(renderer, sprite);
 	SDL_FreeSurface(sprite);
