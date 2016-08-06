@@ -10,7 +10,7 @@ class Biome
 public:
 	Biome(char *sprPath, SDL_Renderer *renderer);
 	~Biome();
-	Room *createRoom(int x, int y);
+	virtual Room *createRoom(int x, int y);
 protected:
 	std::vector<Room *> rooms;
 	BiomeType type;
@@ -18,7 +18,6 @@ protected:
 	int high_x;
 	int low_y;
 	int high_y;
-private:
 	char *sprPath;
 	SDL_Renderer *renderer;
 };

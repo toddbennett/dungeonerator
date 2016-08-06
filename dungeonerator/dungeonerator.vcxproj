@@ -152,21 +152,51 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Biome.cpp" />
+    <ClCompile Include="Castle.cpp" />
+    <ClCompile Include="Desert.cpp" />
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="Dungeonerator.cpp" />
+    <ClCompile Include="Earthquake.cpp" />
+    <ClCompile Include="Farm.cpp" />
+    <ClCompile Include="Forest.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Grassland.cpp" />
+    <ClCompile Include="Graveyard.cpp" />
+    <ClCompile Include="Ice.cpp" />
+    <ClCompile Include="Lake.cpp" />
     <ClCompile Include="Overworld.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="River.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Ruins.cpp" />
+    <ClCompile Include="Sky.cpp" />
+    <ClCompile Include="Swamp.cpp" />
+    <ClCompile Include="Village.cpp" />
+    <ClCompile Include="Volcano.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Biome.h" />
+    <ClInclude Include="Castle.h" />
+    <ClInclude Include="Desert.h" />
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="Dungeonerator.h" />
+    <ClInclude Include="Earthquake.h" />
+    <ClInclude Include="Farm.h" />
+    <ClInclude Include="Forest.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Grassland.h" />
+    <ClInclude Include="Graveyard.h" />
+    <ClInclude Include="Ice.h" />
+    <ClInclude Include="Lake.h" />
     <ClInclude Include="Overworld.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="River.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="Ruins.h" />
+    <ClInclude Include="Sky.h" />
+    <ClInclude Include="Swamp.h" />
+    <ClInclude Include="Village.h" />
+    <ClInclude Include="Volcano.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
