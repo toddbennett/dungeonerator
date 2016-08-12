@@ -14,7 +14,7 @@ private:
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 	char *path;
-	overworld *o;
+	Overworld *o;
 	GameObject *objList;
 	std::priority_queue<GameObject *, std::vector<GameObject *>, DepthComparator> objQ;
 };

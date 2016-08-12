@@ -1,21 +1,21 @@
 #pragma once
 #include "Biome.h"
 
-struct point {
+struct Point {
 	int x;
 	int y;
 };
 
-class overworld
+class Overworld
 {
 public:
-	overworld();
-	~overworld();
+	Overworld();
+	~Overworld();
 	BiomeType getBiome(int x, int y);
 private:
-	void growPoint(BiomeType biome, point nodule, int biomesize, int percentage);
+	void growPoint(BiomeType biome, Point nodule, int biomesize, int percentage);
 	void fillPoint(BiomeType biome);
-	point getFreePoint();
+	Point getFreePoint();
 	int mapwidth;
 	int mapheight;
 	int mapsize;

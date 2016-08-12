@@ -25,7 +25,7 @@ Dungeonerator::Dungeonerator() {
 	strcpy(path, SDL_GetBasePath());
 	strcat(path, "spr\\");
 	
-	o = new overworld();
+	o = new Overworld();
 }
 
 Dungeonerator::~Dungeonerator() {
@@ -58,7 +58,7 @@ void Dungeonerator::run() {
 				case SDL_SCANCODE_SPACE:
 					std::cout << player->getName() << "\n";
 					delete o;
-					o = new overworld();
+					o = new Overworld();
 					for (int i = 0; i < 16; i++) {
 						for (int j = 0; j < 16; j++) {
 							delete map[i][j];

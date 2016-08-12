@@ -2,20 +2,20 @@
 
 #include "overworld.h"
 //Please refer to the Biome Types file on the github with regards to biome numbers and properties
-point overworld::getFreePoint()
+Point Overworld::getFreePoint()
 {
-	point freePoint = { rand() % 16,rand() % 16 };
+	Point freePoint = { rand() % 16,rand() % 16 };
 	while (biomeGrid[freePoint.x][freePoint.y] != 0) freePoint = { rand() % 16,rand() % 16 };
 	return freePoint;
 }
 
-void overworld::growPoint(BiomeType biome,point nodule, int biomesize, int percentage)
+void Overworld::growPoint(BiomeType biome,Point nodule, int biomesize, int percentage)
 {
 	//larger percentage values will create more triangular/diamond shaped biomes, while smaller values will tend to create more snaking, fractal-like shapes
 	biomeGrid[nodule.x][nodule.y] = biome;
 	int a = 1; //number of points we have assigned to the biome so far
 	int b = 0;//make sure we don't get stuck in this loop
-	point biomePoints[40];
+	Point biomePoints[40];
 
 	biomePoints[0] = { nodule.x,nodule.y };
 	while (a < biomesize && b < 300)
@@ -72,7 +72,7 @@ void overworld::growPoint(BiomeType biome,point nodule, int biomesize, int perce
 	}
 }
 
-void overworld::fillPoint(BiomeType biome)
+void Overworld::fillPoint(BiomeType biome)
 {
 	//fillPoint checks the grid for small gaps and crevices and fills them in
 	for (int i = 0; i < 16; i++)
@@ -84,7 +84,7 @@ void overworld::fillPoint(BiomeType biome)
 	}
 }
 
-overworld::overworld()
+Overworld::Overworld()
 {
 	//later these will be selectable from the start screen
 	mapwidth = 16;
@@ -123,7 +123,7 @@ overworld::overworld()
 	biomespicked += 1;
 	
 	//start placing the biomes we have picked
-	point node = { 0, 0 }; //make sure each biome initializes this 
+	Point node = { 0, 0 }; //make sure each biome initializes this 
 	//place mountains first
 	if (biomeList[4])
 	{
@@ -207,7 +207,7 @@ overworld::overworld()
 	if (biomeList[8])
 	{
 
-		point target;  //the mouth of the river
+		Point target;  //the mouth of the river
 		//is there a lake?
 		if (biomeList[6])
 		{
@@ -307,11 +307,11 @@ overworld::overworld()
 }
 
 
-overworld::~overworld()
+Overworld::~Overworld()
 {
 }
 
-BiomeType overworld::getBiome(int x, int y)
+BiomeType Overworld::getBiome(int x, int y)
 {
 	return biomeGrid[x][y];
 }
