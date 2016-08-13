@@ -4,7 +4,7 @@ class River :
 	public Biome
 {
 public:
-	River(char *sprPath, SDL_Renderer *renderer);
+	River();
 	~River();
 	virtual Room *createRoom(int x, int y);
 };

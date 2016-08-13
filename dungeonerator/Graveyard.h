@@ -4,7 +4,7 @@ class Graveyard :
 	public Biome
 {
 public:
-	Graveyard(char *sprPath, SDL_Renderer *renderer);
+	Graveyard();
 	~Graveyard();
 	virtual Room *createRoom(int x, int y);
 };

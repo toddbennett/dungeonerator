@@ -1,9 +1,7 @@
 #include "Biome.h"
 
-Biome::Biome(char *sprPath, SDL_Renderer *renderer)
+Biome::Biome()
 {
-	this->sprPath = sprPath;
-	this->renderer = renderer;
 	type = BIO_BLANK;
 	low_x = -1;
 	low_y = -1;
@@ -18,7 +16,7 @@ Biome::~Biome()
 
 Room *Biome::createRoom(int x, int y)
 {
-	Room *r = new Room(type, x, y, sprPath, renderer);
+	Room *r = new Room(type, x, y);
 	r->setTiles("biome0.bmp", 1);
 	int **map = new int*[16];
 	for (int i = 0; i < 16; i++) {

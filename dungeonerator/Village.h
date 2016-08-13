@@ -4,7 +4,7 @@ class Village :
 	public Biome
 {
 public:
-	Village(char *sprPath, SDL_Renderer *renderer);
+	Village();
 	~Village();
 	virtual Room *createRoom(int x, int y);
 };

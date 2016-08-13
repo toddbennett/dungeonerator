@@ -4,7 +4,7 @@ class Sky :
 	public Biome
 {
 public:
-	Sky(char *sprPath, SDL_Renderer *renderer);
+	Sky();
 	~Sky();
 	virtual Room *createRoom(int x, int y);
 };

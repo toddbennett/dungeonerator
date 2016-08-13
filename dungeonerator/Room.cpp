@@ -1,66 +1,60 @@
 #include <string.h>
+#include "Globals.h"
 #include "Room.h"
 
-Room::Room(BiomeType biome, int x, int y, char *sprPath, SDL_Renderer *renderer) : GameObject(x, y)
+Room::Room(BiomeType biome, int x, int y) : GameObject(x, y)
 {
-	this->renderer = renderer;
-	this->sprPath = sprPath;
 	this->biome = biome;
-	char *spritePath = new char[256];
-	spritePath[0] = 0;
-	strcat(spritePath, sprPath);
 	switch (biome) {
 	case BIO_GRASSLAND:
-		strcat(spritePath, "biome1.bmp");
+		setSprite("biome1.bmp");
 		break;
 	case BIO_VILLAGE:
-		strcat(spritePath, "biome2.bmp");
+		setSprite("biome2.bmp");
 		break;
 	case BIO_FOREST:
-		strcat(spritePath, "biome3.bmp");
+		setSprite("biome3.bmp");
 		break;
 	case BIO_VOLCANO:
-		strcat(spritePath, "biome4.bmp");
+		setSprite("biome4.bmp");
 		break;
 	case BIO_ICE:
-		strcat(spritePath, "biome5.bmp");
+		setSprite("biome5.bmp");
 		break;
 	case BIO_LAKE:
-		strcat(spritePath, "biome6.bmp");
+		setSprite("biome6.bmp");
 		break;
 	case BIO_GRAVEYARD:
-		strcat(spritePath, "biome7.bmp");
+		setSprite("biome7.bmp");
 		break;
 	case BIO_RIVER:
-		strcat(spritePath, "biome8.bmp");
+		setSprite("biome8.bmp");
 		break;
 	case BIO_CASTLE:
-		strcat(spritePath, "biome9.bmp");
+		setSprite("biome9.bmp");
 		break;
 	case BIO_SWAMP:
-		strcat(spritePath, "biome10.bmp");
+		setSprite("biome10.bmp");
 		break;
 	case BIO_RUINS:
-		strcat(spritePath, "biome11.bmp");
+		setSprite("biome11.bmp");
 		break;
 	case BIO_DESERT:
-		strcat(spritePath, "biome12.bmp");
+		setSprite("biome12.bmp");
 		break;
 	case BIO_FARM:
-		strcat(spritePath, "biome13.bmp");
+		setSprite("biome13.bmp");
 		break;
 	case BIO_EARTHQUAKE:
-		strcat(spritePath, "biome14.bmp");
+		setSprite("biome14.bmp");
 		break;
 	case BIO_SKY:
-		strcat(spritePath, "biome15.bmp");
+		setSprite("biome15.bmp");
 		break;
 	default:
-		strcat(spritePath, "biome0.bmp");
+		setSprite("biome0.bmp");
 		break;
 	}
-	setSprite(spritePath, renderer);
-	delete[] spritePath;
 }
 
 Room::~Room()
@@ -68,16 +62,12 @@ Room::~Room()
 	
 }
 
-void Room::setTiles(char *path, int n)
+void Room::setTiles(std::string filename, int n)
 {
 	const int TILE_SIZE = 16;
 
 	numTiles = n;
-	char spritePath[256];
-	spritePath[0] = 0;
-	strcat(spritePath, sprPath);
-	strcat(spritePath, path);
-	tiles = SDL_LoadBMP(spritePath);
+	tiles = SDL_LoadBMP((SPR_PATH + filename).c_str());
 }
 
 void Room::createBackground(int** tileMap) {
@@ -89,11 +79,11 @@ void Room::createBackground(int** tileMap) {
 			SDL_BlitSurface(tiles, &src, bg, &dst);
 		}
 	}
-	background = SDL_CreateTextureFromSurface(renderer, bg);
+	background = SDL_CreateTextureFromSurface(RENDERER, bg);
 	SDL_FreeSurface(bg);
 }
 
 void Room::drawBackground()
 {
-	SDL_RenderCopy(renderer, background, NULL, NULL);
+	SDL_RenderCopy(RENDERER, background, NULL, NULL);
 }

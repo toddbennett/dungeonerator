@@ -4,7 +4,7 @@ class Volcano :
 	public Biome
 {
 public:
-	Volcano(char *sprPath, SDL_Renderer *renderer);
+	Volcano();
 	~Volcano();
 	virtual Room *createRoom(int x, int y);
 };

@@ -26,15 +26,14 @@ enum BiomeType {
 class Room : public GameObject
 {
 public:
-	Room(BiomeType biome, int x, int y, char *sprPath, SDL_Renderer *renderer);
+	Room(BiomeType biome, int x, int y);
 	~Room();
-	void setTiles(char *path, int n);
+	void setTiles(std::string filename, int n);
 	void createBackground(int** tileMap);
 	void drawBackground();
 private:
 	BiomeType biome;
 	SDL_Texture *background;
-	char *sprPath;
 	SDL_Surface *tiles;
 	int numTiles;
 };

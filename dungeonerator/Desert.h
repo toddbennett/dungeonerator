@@ -4,7 +4,7 @@ class Desert :
 	public Biome
 {
 public:
-	Desert(char *sprPath, SDL_Renderer *renderer);
+	Desert();
 	~Desert();
 	virtual Room *createRoom(int x, int y);
 };

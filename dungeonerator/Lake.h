@@ -4,7 +4,7 @@ class Lake :
 	public Biome
 {
 public:
-	Lake(char *sprPath, SDL_Renderer *renderer);
+	Lake();
 	~Lake();
 	virtual Room *createRoom(int x, int y);
 };

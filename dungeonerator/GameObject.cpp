@@ -1,11 +1,12 @@
-#include "GameObject.h"
 #include <string>
+#include "Globals.h"
+#include "GameObject.h"
 
-GameObject::GameObject(char *sprPath, int x, int y, SDL_Renderer *renderer)
+
+GameObject::GameObject(int x, int y, std::string filename)
 {
-	this->renderer = renderer;
-	SDL_Surface *sprite = SDL_LoadBMP(sprPath);
-	texture = SDL_CreateTextureFromSurface(renderer, sprite);
+	SDL_Surface *sprite = SDL_LoadBMP((SPR_PATH + filename).c_str());
+	texture = SDL_CreateTextureFromSurface(RENDERER, sprite);
 	SDL_FreeSurface(sprite);
 	this->x = x;
 	this->y = y;
@@ -22,10 +23,10 @@ GameObject::~GameObject()
 	SDL_DestroyTexture(texture);
 }
 
-void GameObject::draw(SDL_Renderer *renderer, int w, int h)
+void GameObject::draw(int w, int h)
 {
 	SDL_Rect d{ x*w,y*h,w,h };
-	SDL_RenderCopy(renderer, texture, NULL, &d);
+	SDL_RenderCopy(RENDERER, texture, NULL, &d);
 }
 
 int GameObject::getDepth()
@@ -78,12 +79,12 @@ std::string GameObject::getName()
 	return returnstring;
 }
 
-void GameObject::setSprite(char *sprPath, SDL_Renderer *renderer)
+void GameObject::setSprite(std::string filename)
 {
 	if (texture) {
 		SDL_DestroyTexture(texture);
 	}
-	SDL_Surface *sprite = SDL_LoadBMP(sprPath);
-	texture = SDL_CreateTextureFromSurface(renderer, sprite);
+	SDL_Surface *sprite = SDL_LoadBMP((SPR_PATH + filename).c_str());
+	texture = SDL_CreateTextureFromSurface(RENDERER, sprite);
 	SDL_FreeSurface(sprite);
 }

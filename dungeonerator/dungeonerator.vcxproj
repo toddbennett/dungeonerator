@@ -184,6 +184,7 @@
     <ClInclude Include="Farm.h" />
     <ClInclude Include="Forest.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Globals.h" />
     <ClInclude Include="Grassland.h" />
     <ClInclude Include="Graveyard.h" />
     <ClInclude Include="Ice.h" />

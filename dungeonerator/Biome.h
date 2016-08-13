@@ -4,11 +4,10 @@
 #include <vector>
 #include "Room.h"
 
-
 class Biome
 {
 public:
-	Biome(char *sprPath, SDL_Renderer *renderer);
+	Biome();
 	~Biome();
 	virtual Room *createRoom(int x, int y);
 protected:
@@ -18,6 +17,4 @@ protected:
 	int high_x;
 	int low_y;
 	int high_y;
-	char *sprPath;
-	SDL_Renderer *renderer;
 };

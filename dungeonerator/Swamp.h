@@ -4,7 +4,7 @@ class Swamp :
 	public Biome
 {
 public:
-	Swamp(char *sprPath, SDL_Renderer *renderer);
+	Swamp();
 	~Swamp();
 	virtual Room *createRoom(int x, int y);
 };

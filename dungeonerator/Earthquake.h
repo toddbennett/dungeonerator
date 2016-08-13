@@ -4,7 +4,7 @@ class Earthquake :
 	public Biome
 {
 public:
-	Earthquake(char *sprPath, SDL_Renderer *renderer);
+	Earthquake();
 	~Earthquake();
 	virtual Room *createRoom(int x, int y);
 };

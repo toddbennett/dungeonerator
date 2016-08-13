@@ -4,7 +4,7 @@ class Forest :
 	public Biome
 {
 public:
-	Forest(char *sprPath, SDL_Renderer *renderer);
+	Forest();
 	~Forest();
 	virtual Room *createRoom(int x, int y);
 };

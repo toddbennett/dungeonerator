@@ -1,6 +1,7 @@
 #include <stdlib.h>
 
-#include "overworld.h"
+#include "Overworld.h"
+#include "Grassland.h"
 //Please refer to the Biome Types file on the github with regards to biome numbers and properties
 Point Overworld::getFreePoint()
 {
@@ -86,22 +87,39 @@ void Overworld::fillPoint(BiomeType biome)
 
 Overworld::Overworld()
 {
-	//later these will be selectable from the start screen
-	mapwidth = 16;
-	mapheight = 16;
-	biomeNumber = 10; 
-
-	mapsize = mapwidth*mapheight;
-
-	for (int i=0;i<16;i++) //fill the array with 0s
-	{ 
+	// TODO: Remove this, deprecated by map
+	for (int i = 0; i<16; i++)
+	{
 		for (int j = 0; j < 16; j++)
 		{
 			biomeGrid[i][j] = BIO_BLANK;
 		}
 	}
+
+	//later these will be selectable from the start screen
+	mapWidth = 16;
+	mapHeight = 16;
+	biomeNumber = 10;
+
+	mapSize = mapWidth*mapHeight;
+
+	map = new Room**[mapWidth];
+	for (int i = 0; i < mapWidth; i++) {
+		map[i] = new Room*[mapHeight];
+		for (int j = 0; j < mapHeight; j++) {
+			map[i][j] = NULL;
+		}
+	}
+
+	biomes = new Biome*[biomeNumber];
+	for (int i = 0; i < biomeNumber; i++) {
+		biomes[i] = NULL;
+	}
 	
 	//pick our biomes
+
+	int biomesPicked = 0;
+
 	biomeList[0] = false; //no maps should contain blank tiles
 	biomeList[1] = true;  //every map contains grassland
 	biomeList[2] = true;  //every map contains a village

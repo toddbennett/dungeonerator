@@ -2,7 +2,7 @@
 
 
 
-Graveyard::Graveyard(char *sprPath, SDL_Renderer *renderer) : Biome(sprPath, renderer)
+Graveyard::Graveyard() : Biome()
 {
 }
 
@@ -13,7 +13,7 @@ Graveyard::~Graveyard()
 
 Room *Graveyard::createRoom(int x, int y)
 {
-	Room *r = new Room(type, x, y, sprPath, renderer);
+	Room *r = new Room(type, x, y);
 	r->setTiles("biome0.bmp", 1);
 	int **map = new int*[16];
 	for (int i = 0; i < 16; i++) {
