@@ -1,22 +1,22 @@
 #include <stdlib.h>
-#include <time.h>
 
-#include "overworld.h"
+#include "Overworld.h"
+#include "Grassland.h"
 //Please refer to the Biome Types file on the github with regards to biome numbers and properties
-point overworld::getFreePoint()
+Point Overworld::getFreePoint()
 {
-	point freePoint = { rand() % 16,rand() % 16 };
+	Point freePoint = { rand() % 16,rand() % 16 };
 	while (biomeGrid[freePoint.x][freePoint.y] != 0) freePoint = { rand() % 16,rand() % 16 };
 	return freePoint;
 }
 
-void overworld::growPoint(biomeType biome,point nodule, int biomesize, int percentage)
+void Overworld::growPoint(BiomeType biome,Point nodule, int biomesize, int percentage)
 {
 	//larger percentage values will create more triangular/diamond shaped biomes, while smaller values will tend to create more snaking, fractal-like shapes
 	biomeGrid[nodule.x][nodule.y] = biome;
 	int a = 1; //number of points we have assigned to the biome so far
 	int b = 0;//make sure we don't get stuck in this loop
-	point biomePoints[40];
+	Point biomePoints[40];
 
 	biomePoints[0] = { nodule.x,nodule.y };
 	while (a < biomesize && b < 300)
@@ -73,7 +73,7 @@ void overworld::growPoint(biomeType biome,point nodule, int biomesize, int perce
 	}
 }
 
-void overworld::fillPoint(biomeType biome)
+void Overworld::fillPoint(BiomeType biome)
 {
 	//fillPoint checks the grid for small gaps and crevices and fills them in
 	for (int i = 0; i < 16; i++)
@@ -85,28 +85,45 @@ void overworld::fillPoint(biomeType biome)
 	}
 }
 
-overworld::overworld()
+Overworld::Overworld()
 {
-	srand(time(NULL));
-	//later these will be selectable from the start screen
-	mapwidth = 16;
-	mapheight = 16;
-	biomeNumber = 10; 
-
-	mapsize = mapwidth*mapheight;
-
-	for (int i=0;i<16;i++) //fill the array with 0s
-	{ 
+	// TODO: Remove this, deprecated by map
+	for (int i = 0; i<16; i++)
+	{
 		for (int j = 0; j < 16; j++)
 		{
 			biomeGrid[i][j] = BIO_BLANK;
 		}
 	}
+
+	//later these will be selectable from the start screen
+	mapWidth = 16;
+	mapHeight = 16;
+	biomeNumber = 10;
+
+	mapSize = mapWidth*mapHeight;
+
+	map = new Room**[mapWidth];
+	for (int i = 0; i < mapWidth; i++) {
+		map[i] = new Room*[mapHeight];
+		for (int j = 0; j < mapHeight; j++) {
+			map[i][j] = NULL;
+		}
+	}
+
+	biomes = new Biome*[biomeNumber];
+	for (int i = 0; i < biomeNumber; i++) {
+		biomes[i] = NULL;
+	}
 	
 	//pick our biomes
+
+	int biomesPicked = 0;
+
 	biomeList[0] = false; //no maps should contain blank tiles
 	biomeList[1] = true;  //every map contains grassland
 	biomeList[2] = true;  //every map contains a village
+	
 	int biomespicked = 2; //two biomes have already been picked
 	for (int i=3;i<16;i++)
 	{
@@ -118,9 +135,13 @@ overworld::overworld()
 		}
 		else biomeList[i] = false;
 	}
+
+	// Always spawn a castle: for testing biome generation
+	biomeList[9] = true;
+	biomespicked += 1;
 	
 	//start placing the biomes we have picked
-	point node = { 0, 0 }; //make sure each biome initializes this 
+	Point node = { 0, 0 }; //make sure each biome initializes this 
 	//place mountains first
 	if (biomeList[4])
 	{
@@ -204,7 +225,7 @@ overworld::overworld()
 	if (biomeList[8])
 	{
 
-		point target;  //the mouth of the river
+		Point target;  //the mouth of the river
 		//is there a lake?
 		if (biomeList[6])
 		{
@@ -304,11 +325,11 @@ overworld::overworld()
 }
 
 
-overworld::~overworld()
+Overworld::~Overworld()
 {
 }
 
-biomeType overworld::getBiome(int x, int y)
+BiomeType Overworld::getBiome(int x, int y)
 {
 	return biomeGrid[x][y];
 }

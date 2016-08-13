@@ -1,29 +1,18 @@
 #pragma once
-enum biomeType {
-	BIO_BLANK,
-	BIO_GRASSLAND,
-	BIO_VILLAGE,
-	BIO_FOREST,
-	BIO_VOLCANO,
-	BIO_ICE,
-	BIO_LAKE,
-	BIO_GRAVEYARD,
-	BIO_RIVER,
-	BIO_CASTLE,
-	BIO_SWAMP,
-	BIO_RUINS,
-	BIO_DESERT,
-	BIO_FARM,
-	BIO_EARTHQUAKE,
-	BIO_SKY
-};
 
-class biome
+#include "SDL.h"
+#include <vector>
+#include "Room.h"
+
+class Biome
 {
 public:
-	biome();
-	~biome();
+	Biome();
+	~Biome();
+	virtual Room *createRoom(int x, int y);
 protected:
+	std::vector<Room *> rooms;
+	BiomeType type;
 	int low_x;
 	int high_x;
 	int low_y;

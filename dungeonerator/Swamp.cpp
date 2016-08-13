@@ -1,20 +1,17 @@
-#include "Biome.h"
+#include "Swamp.h"
 
-Biome::Biome()
+
+
+Swamp::Swamp() : Biome()
 {
-	type = BIO_BLANK;
-	low_x = -1;
-	low_y = -1;
-	high_x = -1;
-	high_y = -1;
 }
 
-Biome::~Biome()
-{
 
+Swamp::~Swamp()
+{
 }
 
-Room *Biome::createRoom(int x, int y)
+Room *Swamp::createRoom(int x, int y)
 {
 	Room *r = new Room(type, x, y);
 	r->setTiles("biome0.bmp", 1);

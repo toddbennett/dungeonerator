@@ -1,20 +1,17 @@
-#include "Biome.h"
+#include "Earthquake.h"
 
-Biome::Biome()
+
+
+Earthquake::Earthquake() : Biome()
 {
-	type = BIO_BLANK;
-	low_x = -1;
-	low_y = -1;
-	high_x = -1;
-	high_y = -1;
 }
 
-Biome::~Biome()
-{
 
+Earthquake::~Earthquake()
+{
 }
 
-Room *Biome::createRoom(int x, int y)
+Room *Earthquake::createRoom(int x, int y)
 {
 	Room *r = new Room(type, x, y);
 	r->setTiles("biome0.bmp", 1);

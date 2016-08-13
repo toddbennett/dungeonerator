@@ -1,28 +1,32 @@
-#include "GameObject.h"
 #include <string>
+#include "Globals.h"
+#include "GameObject.h"
 
-GameObject::GameObject(char *sprPath, int x, int y)
+
+GameObject::GameObject(int x, int y, std::string filename)
 {
-	sprite = SDL_LoadBMP(sprPath);
+	SDL_Surface *sprite = SDL_LoadBMP((SPR_PATH + filename).c_str());
+	texture = SDL_CreateTextureFromSurface(RENDERER, sprite);
+	SDL_FreeSurface(sprite);
 	this->x = x;
 	this->y = y;
 }
 
 GameObject::GameObject(int x, int y) {
-	sprite = NULL;
+	texture = 0;
 	this->x = x;
 	this->y = y;
 }
 
 GameObject::~GameObject()
 {
-	SDL_FreeSurface(sprite);
+	SDL_DestroyTexture(texture);
 }
 
-void GameObject::draw(SDL_Surface *surface, int w, int h)
+void GameObject::draw(int w, int h)
 {
 	SDL_Rect d{ x*w,y*h,w,h };
-	SDL_BlitScaled(sprite, NULL, surface, &d);
+	SDL_RenderCopy(RENDERER, texture, NULL, &d);
 }
 
 int GameObject::getDepth()
@@ -30,7 +34,7 @@ int GameObject::getDepth()
 	return depth;
 }
 
-std::string getName()
+std::string GameObject::getName()
 {
 //100% sure this is a bad implementation
 
@@ -75,10 +79,12 @@ std::string getName()
 	return returnstring;
 }
 
-void GameObject::setSprite(char *sprPath)
+void GameObject::setSprite(std::string filename)
 {
-	if (sprite) {
-		SDL_FreeSurface(sprite);
+	if (texture) {
+		SDL_DestroyTexture(texture);
 	}
-	sprite = SDL_LoadBMP(sprPath);
+	SDL_Surface *sprite = SDL_LoadBMP((SPR_PATH + filename).c_str());
+	texture = SDL_CreateTextureFromSurface(RENDERER, sprite);
+	SDL_FreeSurface(sprite);
 }

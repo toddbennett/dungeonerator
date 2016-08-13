@@ -1,20 +1,17 @@
-#include "Biome.h"
+#include "Forest.h"
 
-Biome::Biome()
+
+
+Forest::Forest() : Biome()
 {
-	type = BIO_BLANK;
-	low_x = -1;
-	low_y = -1;
-	high_x = -1;
-	high_y = -1;
 }
 
-Biome::~Biome()
-{
 
+Forest::~Forest()
+{
 }
 
-Room *Biome::createRoom(int x, int y)
+Room *Forest::createRoom(int x, int y)
 {
 	Room *r = new Room(type, x, y);
 	r->setTiles("biome0.bmp", 1);
